@@ -4,11 +4,11 @@
 # Schedule
 
 first: 
-      * Decide how to create the server side of things.
-      * (storage data structure, message sending, message receiving) 
-      * the board might be represented as a matrix, or as an array simulating a matrix
-      * the gRPC info should be set up correctly to allow RPC from pokemon and trainers alike. 
-      * the board should keep track of how/when players/pokemon move around. 
+* Decide how to create the server side of things.
+* (storage data structure, message sending, message receiving) 
+* the board might be represented as a matrix, or as an array simulating a matrix
+* the gRPC info should be set up correctly to allow RPC from pokemon and trainers alike. 
+* the board should keep track of how/when players/pokemon move around. 
 second: 
       * Decide how to create the client (pokemon) side of things.
       * how will they decide their moves. 
