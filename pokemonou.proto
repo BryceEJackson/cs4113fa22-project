@@ -1,0 +1,28 @@
+
+message Position
+{
+	int32 x = 1;
+	int32 y = 1;
+}
+
+message Outcome
+{
+	int32 x = 1;
+	int32 y = 2;
+}
+
+message Catch
+{
+	string outcome = 1;
+}
+
+
+service Feedback
+{
+	rpc CheckBoard(Position) returns (Outcome) {}
+	rpc Move(Position) returns (Position) {}
+	rpc Capture(Position) returns (Catch) {}
+	rpc Add(Position) returns (Position) {}
+	rpc Del(Position) returns (Position) {}
+
+}
