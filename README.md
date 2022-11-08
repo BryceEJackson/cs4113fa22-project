@@ -47,4 +47,53 @@
       * removing from the board
       * adding to the board
 
+##### Bryce Jackson
+###### Dist OS final project
+#
+
+## Fucntions
+
+## Server
+
+###int Caprtured()
+The server can sense if pokemon is captured with this function. The function takes no inputs but checks with the server if the pokemon is captured and then returns-1 if no and 1 if yes. 
+
+### Moves()
+Has no imput or output but shows the moves of the pokemon in the terminal when called. 
+
+### coordinate Board()
+ examines the board and chooses a spot to move. no inputs, but examines board and returns coordinates to a valid move. 
+ 
+## Trainer
+
+### Capture 
+returns true if the pokemon is captured. takes in a coordinate of the pokemon to be captured. 
+
+### CheckBoard
+Asks the server to check the board and then returns the place to move. takes no input. 
+
+### Move
+tells the server where the move is going to be to. takes in the coordinate and returns 1 on success -1 on fail. 
+
+### Pokedex
+prints the pokemon that the trainer has caught. takes in no input, prints the output to the terminal.
+
+### Path 
+prints the path the trainer has follows (the spaces it has visited). Takes no input, outputs the terminal. 
+
+## Pokemon
+
+### Checkboard
+Asks the server to check the board and then returns the place to move. takes no input. 
+
+### Move
+tells the server where the move is going to be to. takes in the coordinate and returns 1 on success -1 on fail. 
+
+### Trainer
+takes no input. outputs the trainer info and where it was caught. 
+
+### Path
+prints the path the trainer has follows (the spaces it has visited). Takes no input, outputs the terminal. 
+
+
           
