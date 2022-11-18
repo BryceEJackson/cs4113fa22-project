@@ -96,4 +96,5 @@ takes no input. outputs the trainer info and where it was caught.
 prints the path the trainer has follows (the spaces it has visited). Takes no input, outputs the terminal. 
 
 
-          
+# Milestone 3
+## ![](milestone3.png)
