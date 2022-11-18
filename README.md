@@ -97,4 +97,6 @@ prints the path the trainer has follows (the spaces it has visited). Takes no in
 
 
 # Milestone 3
-## ![](milestone3.png)
+## ![](https://github.com/BryceEJackson/cs4113fa22-project/blob/main/milestone3.PNG)
+
+I have created the processes which boot up (there is three of them in this case, one for each type). I have also created a game board and placed the pokemon and trainer on the gameboard, with some slight work on logic for movement.
