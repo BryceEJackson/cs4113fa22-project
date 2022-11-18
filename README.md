@@ -99,4 +99,6 @@ prints the path the trainer has follows (the spaces it has visited). Takes no in
 # Milestone 3
 ## ![](https://github.com/BryceEJackson/cs4113fa22-project/blob/main/milestone3.PNG)
 
-I have created the processes which boot up (there is three of them in this case, one for each type). I have also created a game board and placed the pokemon and trainer on the gameboard, with some slight work on logic for movement.
+I have created the processes which boot up (there is three of them in this case, one for each type). I have also created a game board and placed the pokemon and trainer on the gameboard, with some slight work on logic for movement. Here you can see the gif of the gameboard. 
+
+![](https://github.com/BryceEJackson/cs4113fa22-project/blob/main/milestone3(1).gif)
