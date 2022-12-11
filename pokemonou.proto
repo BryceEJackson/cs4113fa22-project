@@ -16,6 +16,13 @@ message Position
 	int32 y = 2;
 }
 
+message Dex
+{
+	int32 x = 1;
+	int32 y = 2;
+	string face = 3;
+}
+
 message Movepos
 {
 	int32 x = 1;
@@ -36,15 +43,22 @@ message Catch
 	int32 y = 3;
 }
 
+message Path
+{
+	string path = 1;
+	string name = 2;
+}
+
 
 service Feedback
 {
 	rpc CheckBoard(Position) returns (Position) {}
+	rpc Flee(Position) returns (Position) {}
 	rpc MoveT(Movepos) returns (Position) {}
 	rpc MoveP(Movepos) returns (Catch) {}
-	rpc Capture(Position) returns (Position) {}
-	rpc Add(Position) returns (Position) {}
-	rpc Del(Position) returns (Position) {}
+
+	rpc submit(Path) returns (Greeting) {}
+	rpc Capture(Position) returns (Dex) {}
 	rpc Setup(Dim) returns (Dim) {}
 
 }

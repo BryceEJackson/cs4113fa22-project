@@ -8,7 +8,7 @@ if __name__ == "__main__":
     if(socket.gethostname() == 'server'):
         server.board(10)
     else: 
-        sleep(3)
+        sleep(5)
     if(socket.gethostname() == 'trainer1'):
         sleep(1)
         client1.start()

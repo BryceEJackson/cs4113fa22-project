@@ -5,17 +5,32 @@ import pokemonou_pb2
 import pokemonou_pb2_grpc
 import random
 
+# TODO: 
+# implement tainer() functionality
+trainer = ""
 response = 0
 tdim = 0
+stepsArray = [None] * 100
+stepCounter = 0
+
+def Path(sc):
+    string = "Path: "
+    for i in range(sc):
+        string += f"{stepsArray[i]}, "
+    print(string)
 
 def start():
     tx = random.randint(0,9)
     ty = random.randint(1,9)
     count = 0
     dir = 0
-    print("client starting...")
+    sc = 0
+    path = ""
+    print("pokemon client starting...")
     try:
         while(True):
+
+
                 sleep(2)
                 # set up the channel and dummy dim for setup request
                 channel = grpc.insecure_channel('server:50051')
@@ -28,14 +43,30 @@ def start():
                 except grpc.RpcError as e: 
                     if grpc.StatusCode.UNKNOWN == e.code():
                         print("error 1")
-                response = stub.Setup(dimension)
-                tdim = response.dim
-               # print(f"dim: {tdim}")
 
-                
+
+                try:
+                    response = stub.Setup(dimension)
+                    tdim = response.dim
+                except grpc.RpcError as e:
+                    #print("pokemon client shutting down!")
+                    break
+
+                stepsArray[sc] = f"({tx},{ty})"
+                sc = sc + 1
+
+                # flee from trainers if they are around
+                position = pokemonou_pb2.Position(x = tx, y = ty)
+                response1 = stub.Flee(position)
+                if(response1.x != 0 and response1.y != 0):
+                    dir = -1
+                    if(response1.x + 1 <= tdim):
+                        tx = response1.x + 1
+                    elif(response.x - 1 >= 0):
+                        tx = response1.x - 1
+                    ty = response1.y
 
                 # do some movements
-                # print(f"position: {tx}, {ty} ")
                 position = pokemonou_pb2.Movepos(x = tx, y = ty, flip = dir)
                 try: 
                     response = stub.MoveP(position)
@@ -51,21 +82,20 @@ def start():
                     sleep(1)
                     tx = response.x
                     ty = response.y
-
-                    # print(f"res.y: {response.y}")
-                    # print(f"res.x: {response.x}")
+                    stepCounter = sc
 
                 except grpc.RpcError as e:
                     print(f"error 2: {e}")
+                    
+
                 #print(f"count{count}")
 
                 if(count == tdim):
-                     dir = 1
+                    dir = 1
                 if(count == 0):
                     dir = 0
+        Path(sc)           
 
-                
-
-                #print("\nclient running...")
+                #print("\n pokemon client running...")
     except KeyboardInterrupt:
         print("Interrupted...")

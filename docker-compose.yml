@@ -55,7 +55,6 @@ services:
 #     container_name: Trainer8
 #     networks:
 #       - default
-
   pokemon1:
     build: .
     hostname: pokemon1
