@@ -1,8 +1,26 @@
+syntax = "proto3";
+
+message Dim
+{
+	int32 dim = 1;
+}
+
+message Greeting
+{
+	string name = 1;
+}
 
 message Position
 {
 	int32 x = 1;
-	int32 y = 1;
+	int32 y = 2;
+}
+
+message Movepos
+{
+	int32 x = 1;
+	int32 y = 2;
+	int32 flip = 3;
 }
 
 message Outcome
@@ -13,16 +31,20 @@ message Outcome
 
 message Catch
 {
-	string outcome = 1;
+	int32 caught = 1;
+	int32 x = 2; 
+	int32 y = 3;
 }
 
 
 service Feedback
 {
-	rpc CheckBoard(Position) returns (Outcome) {}
-	rpc Move(Position) returns (Position) {}
-	rpc Capture(Position) returns (Catch) {}
+	rpc CheckBoard(Position) returns (Position) {}
+	rpc MoveT(Movepos) returns (Position) {}
+	rpc MoveP(Movepos) returns (Catch) {}
+	rpc Capture(Position) returns (Position) {}
 	rpc Add(Position) returns (Position) {}
 	rpc Del(Position) returns (Position) {}
+	rpc Setup(Dim) returns (Dim) {}
 
 }

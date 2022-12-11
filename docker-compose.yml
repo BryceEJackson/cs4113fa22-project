@@ -7,19 +7,103 @@ services:
     container_name: Board
     networks:
       - default
-  trainer:
+  trainer1:
     build: .
-    hostname: trainer
-    container_name: Trainer
+    hostname: trainer1
+    container_name: Trainer1
     networks:
       - default
-  pokemon:
+  trainer2:
     build: .
-    hostname: pokemon
-    container_name: Pokemon
+    hostname: trainer2
+    container_name: Trainer2
     networks:
       - default
+  trainer3:
+    build: .
+    hostname: trainer3
+    container_name: Trainer3
+    networks:
+      - default
+  trainer4:
+    build: .
+    hostname: trainer4
+    container_name: Trainer4
+    networks:
+      - default
+  trainer5:
+    build: .
+    hostname: trainer5
+    container_name: Trainer5
+    networks:
+      - default
+#   trainer6:
+#     build: .
+#     hostname: trainer6
+#     container_name: Trainer6
+#     networks:
+#       - default
+#   trainer7:
+#     build: .
+#     hostname: trainer7
+#     container_name: Trainer7
+#     networks:
+#       - default
+#   trainer8:
+#     build: .
+#     hostname: trainer8
+#     container_name: Trainer8
+#     networks:
+#       - default
 
-networks:
-  default:
-    driver: bridge
+  pokemon1:
+    build: .
+    hostname: pokemon1
+    container_name: Pokemon1
+    networks:
+      - default
+  pokemon2:
+    build: .
+    hostname: pokemon2
+    container_name: Pokemon2
+    networks:
+      - default
+  pokemon3:
+    build: .
+    hostname: pokemon3
+    container_name: Pokemon3
+    networks:
+      - default
+  pokemon4:
+    build: .
+    hostname: pokemon4
+    container_name: Pokemon4
+    networks:
+      - default
+  pokemon5:
+    build: .
+    hostname: pokemon5
+    container_name: Pokemon5
+    networks:
+      - default
+#   pokemon6:
+#     build: .
+#     hostname: pokemon6
+#     container_name: Pokemon6
+#     networks:
+#       - default
+#   pokemon7:
+#     build: .
+#     hostname: pokemon7
+#     container_name: Pokemon7
+#     networks:
+#       - default
+#   pokemon8:
+#     build: .
+#     hostname: pokemon8
+#     container_name: Pokemon8
+#     networks:
+#       - default
+# networks:
+#   default:
+#     driver: bridge
