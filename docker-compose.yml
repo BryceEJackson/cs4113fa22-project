@@ -37,24 +37,24 @@ services:
     container_name: Trainer5
     networks:
       - default
-#   trainer6:
-#     build: .
-#     hostname: trainer6
-#     container_name: Trainer6
-#     networks:
-#       - default
-#   trainer7:
-#     build: .
-#     hostname: trainer7
-#     container_name: Trainer7
-#     networks:
-#       - default
-#   trainer8:
-#     build: .
-#     hostname: trainer8
-#     container_name: Trainer8
-#     networks:
-#       - default
+  trainer6:
+    build: .
+    hostname: trainer6
+    container_name: Trainer6
+    networks:
+      - default
+  trainer7:
+    build: .
+    hostname: trainer7
+    container_name: Trainer7
+    networks:
+      - default
+  trainer8:
+    build: .
+    hostname: trainer8
+    container_name: Trainer8
+    networks:
+      - default
   pokemon1:
     build: .
     hostname: pokemon1
@@ -85,24 +85,25 @@ services:
     container_name: Pokemon5
     networks:
       - default
-#   pokemon6:
-#     build: .
-#     hostname: pokemon6
-#     container_name: Pokemon6
-#     networks:
-#       - default
-#   pokemon7:
-#     build: .
-#     hostname: pokemon7
-#     container_name: Pokemon7
-#     networks:
-#       - default
-#   pokemon8:
-#     build: .
-#     hostname: pokemon8
-#     container_name: Pokemon8
-#     networks:
-#       - default
-# networks:
-#   default:
-#     driver: bridge
+  pokemon6:
+    build: .
+    hostname: pokemon6
+    container_name: Pokemon6
+    networks:
+      - default
+  pokemon7:
+    build: .
+    hostname: pokemon7
+    container_name: Pokemon7
+    networks:
+      - default
+  pokemon8:
+    build: .
+    hostname: pokemon8
+    container_name: Pokemon8
+    networks:
+      - default
+      
+networks:
+  default:
+    driver: bridge

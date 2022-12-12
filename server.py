@@ -19,9 +19,9 @@ p = ['🐒', '🐕', '🙊', '🐗', '🐪', '🐘', '🦬', '🦓','🧸']
 
 
 #some global variables for trainer/pokemon positions and capture info
-tpositions  = [[0 for i in range(100)] for j in range(100)]
-ppositions  = [[0 for i in range(100)] for j in range(100)]
-capture  = [[0 for i in range(100)] for j in range(100)]
+tpositions  = [[0 for i in range(200)] for j in range(200)]
+ppositions  = [[0 for i in range(200)] for j in range(200)]
+capture  = [[0 for i in range(200)] for j in range(200)]
 
 
 #write the board dimension to a file
@@ -34,21 +34,37 @@ def getDim():
 
 # print the moves made by the trainers
 def Moves():
-    file = open("trainer1.txt", "r")
-    path = file.read(1024) # read the file to a buffer for output
-    print(f"trainer1 Moves: {path}")
-    file = open("trainer2.txt", "r")
-    path = file.read(1024) # read the file to a buffer for output
-    print(f"trainer2 Moves: {path}")
-    file = open("trainer3.txt", "r")
-    path = file.read(1024) # read the file to a buffer for output
-    print(f"trainer3 Moves: {path}")
-    file = open("trainer4.txt", "r")
-    path = file.read(1024) # read the file to a buffer for output
-    print(f"trainer4 Moves: {path}")
-    file = open("trainer5.txt", "r")
-    path = file.read(1024) # read the file to a buffer for output
-    print(f"trainer5 Moves: {path}")
+    try: 
+        file = open("trainer1.txt", "r")
+        path = file.read(1024) # read the file to a buffer for output
+        print(f"trainer1 Moves: {path}")
+        file = open("trainer2.txt", "r")
+        path = file.read(1024) # read the file to a buffer for output
+        print(f"trainer2 Moves: {path}")
+        file = open("trainer3.txt", "r")
+        path = file.read(1024) # read the file to a buffer for output
+        print(f"trainer3 Moves: {path}")
+        file = open("trainer4.txt", "r")
+        path = file.read(1024) # read the file to a buffer for output
+        print(f"trainer4 Moves: {path}")
+        file = open("trainer5.txt", "r")
+        path = file.read(1024) # read the file to a buffer for output
+        print(f"trainer5 Moves: {path}")
+        file = open("trainer6.txt", "r")
+        path = file.read(1024) # read the file to a buffer for output
+        print(f"trainer6 Moves: {path}")
+        file = open("trainer7.txt", "r")
+        path = file.read(1024) # read the file to a buffer for output
+        print(f"trainer7 Moves: {path}")
+        file = open("trainer8.txt", "r")
+        path = file.read(1024) # read the file to a buffer for output
+        print(f"trainer8 Moves: {path}")
+        file = open("trainer9.txt", "r")
+        path = file.read(1024) # read the file to a buffer for output
+        print(f"trainer9 Moves: {path}")
+    except FileNotFoundError as e:
+        print("file not found...")
+    
 
 
 
@@ -59,6 +75,15 @@ class FeedbackServicer(pokemonou_pb2_grpc.FeedbackServicer):
     def __init__(self, count):
         self.count = count
 
+#definen remove 
+    def remove(self, request, context):
+         # edit the captured pokemon counter
+        time.sleep(random.uniform(.1,.8))
+        
+        ppositions[request.x][request.y] = 0
+        response = pokemonou_pb2.Dim(dim = -1)
+        return response
+
 #setup the board dimension vars
     def Setup(self, request, context): 
         response = pokemonou_pb2.Dim()
@@ -66,37 +91,31 @@ class FeedbackServicer(pokemonou_pb2_grpc.FeedbackServicer):
         return response
 #trainer captures a pokemon
     def Capture(self, request, context):
-        file = open("np.txt","r")
-        txt = file.read(2)
-        np = int(txt)
-        print(f"NEW NUMBER OF POKEMON: {np}")
-        # file.close()
-        # file = open("np.txt", "w")
+        file = open("np.txt", "r")
+        time.sleep(.2) # sleep to prevent access denial
+        np = file.read(2)
+        np = int(np)
+        print(f"pokemon left: {np}")
+
+        np = np - 1
+        file.close()
+        file = open("np.txt", "w")
+        file.write(str(np))
+        file.close()    
         response = pokemonou_pb2.Dex()
         tx = request.x
         ty = request.y 
-        if(ppositions[tx][ty] == 1):
+        if(ppositions[tx][ty] == 1 or ppositions[tx - 1][ty] == 1 or ppositions[tx + 1][ty] == 1 or ppositions[tx - 1][ty + 1] == 1 or ppositions[tx-1][ty - 1] or ppositions[tx][ty + 1] == 1 or ppositions[tx][ty - 1] == 1):
             capture[tx][ty] = 1
             print("pokemon here!")
             print(f"throw ball from: {tx},{ty}")
             ppositions[tx][ty] = 0
-            # edit the captured pokemon counter
-            file = open("np.txt", "r")
-            time.sleep(.2) # sleep to prevent access denial
-            np = file.read(2)
-            np = int(np)
-            np = np - 1
-            file.close()
-            file = open("np.txt", "w")
-            file.write(str(np))
-            file.close()    
-            # np = np - 1
-        # file.write(np)
-        # file.close()    
+        
         response.x = tx
         response.y = ty
         response.face = p[np]
         return response
+
 #pokemon senses trainer and must run
     def Flee(self, request, context):
         file = open("dim.txt", "r")
@@ -224,17 +243,12 @@ class FeedbackServicer(pokemonou_pb2_grpc.FeedbackServicer):
     
     	#check for having been caught, if so return caught = 1 (pokemon exit) 
         response1 = pokemonou_pb2.Catch()
-        if(ppositions[request.x][request.y] == 0 and capture[request.x][request.y] == 1):
+        if(capture[request.x][request.y] == 1):
             response1.caught = 1
             response1.x = request.x
             response1.y = request.y
-            if(response1.caught == 1):
-                print(f"caught at {response1.x}, {response1.y}!!!!!!\n")
 
-                ppositions[response1.x][response1.y] = 0
-                ppositions[request.x][request.y] = 0
-                capture[request.x][request.y] = 0
-                return response1
+            return response1
         
     
         response = pokemonou_pb2.Catch()
@@ -255,7 +269,6 @@ class FeedbackServicer(pokemonou_pb2_grpc.FeedbackServicer):
         file.close()
         dim = int(dim)
         dir = request.flip
-        #print(f"dir: {dir}")
 
         # move up and down
         if(dir == 0):
@@ -274,10 +287,11 @@ class FeedbackServicer(pokemonou_pb2_grpc.FeedbackServicer):
             if(response.x-1 > 0):
                 response.x = response.x - 1
 
-        # Run away!
+        # # Run away!
         if(dir == -1):
-            response.x = request.x
-            response.y = request.y
+            dir = 1
+        #     response.x = request.x
+        #     response.y = request.y
         
         # if request.x == 0 and request.y == 0:
         #     ppositions[1][0] = 0
@@ -298,7 +312,7 @@ server.add_insecure_port('[::]:50051')
 server.start()
 
 # set the number of pokemon variable and store it to a file. 
-np = 5
+np = 8
 file = open("np.txt","w")
 file.write(str(np))
 file.close()
@@ -321,21 +335,21 @@ def board(size):
 #run the server and print the board
     try:
         while True:
-            tc = 5
-            pc = 5
+            tc = 8
+            pc = 8
 
             # shut down on no pokemon left
             file = open("np.txt", "r")
             np = file.read(2)
             np = int(np)
-            if(np == 0):
+            if(np == 0 or np < 0):
                 Moves()
                 print("no more pokemon! GAME OVER!\n")
                 break
 
-            #clear players, (basically prevents trails)
-            for i in range(0,size):
-                for j in range(0,size):
+            #prevents trailsfrom being created
+            for i in range(0,100):
+                for j in range(0,100):
                     tpositions[i][j] = 0
 
             time.sleep(1) # wait .75 sec between board print updates
@@ -344,12 +358,14 @@ def board(size):
             print()
 
 
+            time.sleep(.2) # sleep to synchronize
             for i in range(0,size):
                 
                 for j in range(0,size):
                     
                     #pokemon here
                     if(ppositions[i][j] == 1):
+                       # print(f"pokemon @: {i},{j}")
                         print(f"|{p[pc]}", end='')
                         pc = pc - 1
 

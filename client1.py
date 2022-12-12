@@ -27,8 +27,8 @@ class dexEntry():
 # print(f"pokemon: {TestArray[1].x},{TestArray[1].y}: {TestArray[1].face}")
 
 # define some global variables for pokedex and path 
-stepsArray = [None] * 100
-dexArray = [None] * 100
+stepsArray = [None] * 300
+dexArray = [None] * 300
 stepsCounter=0
 dexCounter = 0
 
@@ -56,12 +56,12 @@ def start():
     dir = 0 
 
     print("trainer client starting...")
-    sleep(5) # wait for pokemon to spawn in ...
+    sleep(15) # wait for pokemon to spawn in ...
 
 
     try:
         while(True):
-                sleep(.85)
+                sleep(random.uniform(.3,.8))
                 # set up the channel and dummy dim for setup request
                 channel = grpc.insecure_channel('server:50051')
                 stub = pokemonou_pb2_grpc.FeedbackStub(channel)
@@ -83,13 +83,8 @@ def start():
 
                     # implement functions for printing the path 
                     printPath(sc)
-                    # print("Steps Taken: ")
-                    # string = "Path: "
-                    # for i in range(sc):
-                    #     string += f"({stepsArray[i].x},{stepsArray[i].y}), "
-                    # print(string)
 
-                    #implement the function for printing the pokedex
+                    # implement the function for printing the pokedex
                     pokeDex(dc)
 
                     break
@@ -139,6 +134,7 @@ def start():
                     #implement else case for capture
                     if(response.x == tx and response.y == ty):
                         cpos = pokemonou_pb2.Position(x = response.x, y = response.y)
+                        sleep(.5)
                         response3 = stub.Capture(cpos)
                         dexArray[dc] = dexEntry(response3.x,response3.y, response3.face)
                         dc = dc+1 # finish implementing dex
@@ -157,7 +153,7 @@ def start():
                     # print(f"res.x: {response.x}")
 
                 except grpc.RpcError as e:
-                    print(f"error 2: {e}")
+                    print() # when the game ends, an RPC might be sent which will exit this loop
                     
 
                 if(count == tdim):

@@ -24,15 +24,15 @@ if __name__ == "__main__":
     if(socket.gethostname() == 'trainer5'):
         sleep(1)
         client1.start()
-    # if(socket.gethostname() == 'trainer6'):
-    #     sleep(15)
-    #     client1.start()
-    # if(socket.gethostname() == 'trainer7'):
-    #     sleep(15)
-    #     client1.start()
-    # if(socket.gethostname() == 'trainer8'):
-    #     sleep(15)
-    #     client1.start()
+    if(socket.gethostname() == 'trainer6'):
+        sleep(15)
+        client1.start()
+    if(socket.gethostname() == 'trainer7'):
+        sleep(15)
+        client1.start()
+    if(socket.gethostname() == 'trainer8'):
+        sleep(15)
+        client1.start()
     if(socket.gethostname() == 'pokemon1'):
         sleep(1)
         client2.start()
@@ -48,12 +48,12 @@ if __name__ == "__main__":
     if(socket.gethostname() == 'pokemon5'):
         sleep(1)
         client2.start()
-    # if(socket.gethostname() == 'pokemon6'):
-    #     sleep(15)
-    #     client2.start()
-    # if(socket.gethostname() == 'pokemon7'):
-    #     sleep(15)
-    #     client2.start()
-    # if(socket.gethostname() == 'pokemon8'):
-    #     sleep(15)
-    #     client2.start()
+    if(socket.gethostname() == 'pokemon6'):
+        sleep(15)
+        client2.start()
+    if(socket.gethostname() == 'pokemon7'):
+        sleep(15)
+        client2.start()
+    if(socket.gethostname() == 'pokemon8'):
+        sleep(15)
+        client2.start()

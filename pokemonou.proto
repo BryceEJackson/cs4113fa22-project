@@ -56,7 +56,7 @@ service Feedback
 	rpc Flee(Position) returns (Position) {}
 	rpc MoveT(Movepos) returns (Position) {}
 	rpc MoveP(Movepos) returns (Catch) {}
-
+	rpc remove(Position) returns(Dim) {}
 	rpc submit(Path) returns (Greeting) {}
 	rpc Capture(Position) returns (Dex) {}
 	rpc Setup(Dim) returns (Dim) {}

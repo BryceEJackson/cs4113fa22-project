@@ -10,7 +10,7 @@ import random
 trainer = ""
 response = 0
 tdim = 0
-stepsArray = [None] * 100
+stepsArray = [None] * 300
 stepCounter = 0
 
 def Path(sc):
@@ -29,9 +29,8 @@ def start():
     print("pokemon client starting...")
     try:
         while(True):
-
-
-                sleep(2)
+                #print(f"pokemon @: {tx},{ty}")
+                sleep(4)
                 # set up the channel and dummy dim for setup request
                 channel = grpc.insecure_channel('server:50051')
                 stub = pokemonou_pb2_grpc.FeedbackStub(channel)
@@ -60,9 +59,9 @@ def start():
                 response1 = stub.Flee(position)
                 if(response1.x != 0 and response1.y != 0):
                     dir = -1
-                    if(response1.x + 1 <= tdim):
+                    if(response1.x + 1 < tdim):
                         tx = response1.x + 1
-                    elif(response.x - 1 >= 0):
+                    elif(response1.x - 1 >= 0):
                         tx = response1.x - 1
                     ty = response1.y
 
@@ -71,6 +70,8 @@ def start():
                 try: 
                     response = stub.MoveP(position)
                     if(response.caught == 1):
+                        stub.remove(position)
+                        print("caught!")
                         break
 
                     if dir == 0:
@@ -87,15 +88,12 @@ def start():
                 except grpc.RpcError as e:
                     print(f"error 2: {e}")
                     
-
-                #print(f"count{count}")
-
+# prevent pokemon from walking off the borad (just makes sure they dont use pos out of bounds)
                 if(count == tdim):
                     dir = 1
                 if(count == 0):
                     dir = 0
         Path(sc)           
 
-                #print("\n pokemon client running...")
     except KeyboardInterrupt:
         print("Interrupted...")
